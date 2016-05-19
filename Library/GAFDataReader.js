@@ -88,7 +88,15 @@ gaf.DataReader.prototype.String = function() {
         }
     }
     return decodeURIComponent(escape(String.fromCharCode.apply(null, new Uint8Array(str))));
-    
+
+};
+
+gaf.DataReader.prototype.JSON = function() {
+    var str = this.String();
+    console.log(str);
+    if (str)
+        return JSON.parse(str).cps;
+    return {};
 };
 
 gaf.DataReader.prototype.startNestedBuffer = function(length) {
