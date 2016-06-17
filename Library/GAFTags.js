@@ -57,6 +57,7 @@ gaf.Tag = function () {
     this["17"] = Object.create(gaf.Tag.DefineTimeline2);
     this["18"] = Object.create(gaf.Tag.DefineExternalObjects);
     this["19"] = Object.create(gaf.Tag.DefineAnimationFrames3);
+    this["20"] = Object.create(gaf.Tag.DefineTimeline3);
 };
 
 gaf.Tag.base = function () {
@@ -464,6 +465,22 @@ gaf.Tag.DefineTimeline.doParse = function (s) {
 gaf.Tag.DefineTimeline2 = Object.create(gaf.Tag.base);
 gaf.Tag.DefineTimeline2.tagName = "TagDefineTimeline2";
 gaf.Tag.DefineTimeline2.doParse = function (s) {
+    var exec = s.fields(
+        'id', 'Uint',
+        'animationFrameCount', 'Uint',
+        'boundingBox', 'Rect',
+        'pivotPoint', 'Point',
+        'linkageName', 'String',
+        'baseClass', 'String'
+    );
+    var result = {'content': exec()};
+    result.content.tags = gaf.ReadTags(s);
+    return result;
+};
+
+gaf.Tag.DefineTimeline3 = Object.create(gaf.Tag.base);
+gaf.Tag.DefineTimeline3.tagName = "TagDefineTimeline3";
+gaf.Tag.DefineTimeline3.doParse = function (s) {
     var exec = s.fields(
         'id', 'Uint',
         'animationFrameCount', 'Uint',
