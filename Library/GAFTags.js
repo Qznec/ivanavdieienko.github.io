@@ -58,7 +58,7 @@ gaf.Tag = function () {
     this["18"] = Object.create(gaf.Tag.DefineExternalObject);
     this["19"] = Object.create(gaf.Tag.DefineAnimationFrames3);
     this["20"] = Object.create(gaf.Tag.DefineTimeline3);
-    this["20"] = Object.create(gaf.Tag.DefineExternalObject2);
+    this["21"] = Object.create(gaf.Tag.DefineExternalObject2);
 };
 
 gaf.Tag.base = function () {
