@@ -55,10 +55,10 @@ gaf.Tag = function () {
     this["15"] = Object.create(gaf.Tag.DefineAtlas3);
     this["16"] = Object.create(gaf.Tag.DefineAtlas4);
     this["17"] = Object.create(gaf.Tag.DefineTimeline2);
-    this["18"] = Object.create(gaf.Tag.DefineExternalObject);
+    this["18"] = Object.create(gaf.Tag.DefineExternalObjects);
     this["19"] = Object.create(gaf.Tag.DefineAnimationFrames3);
     this["20"] = Object.create(gaf.Tag.DefineTimeline3);
-    this["21"] = Object.create(gaf.Tag.DefineExternalObject2);
+    this["21"] = Object.create(gaf.Tag.DefineExternalObjects2);
 };
 
 gaf.Tag.base = function () {
@@ -544,9 +544,9 @@ gaf.Tag._readFilter = function (s) {
 };
 
 
-gaf.Tag.DefineExternalObject = Object.create(gaf.Tag.base);
-gaf.Tag.DefineExternalObject.tagName = "TagDefineExternalObject";
-gaf.Tag.DefineExternalObject.doParse = function (s) {
+gaf.Tag.DefineExternalObjects = Object.create(gaf.Tag.base);
+gaf.Tag.DefineExternalObjects.tagName = "TagDefineExternalObjects";
+gaf.Tag.DefineExternalObjects.doParse = function (s) {
     var exec = s.array('Uint', s.fields(
         'objectId', 'Uint',
         'linkageName', 'String'
@@ -554,9 +554,9 @@ gaf.Tag.DefineExternalObject.doParse = function (s) {
     return {'content': exec()};
 };
 
-gaf.Tag.DefineExternalObject2 = Object.create(gaf.Tag.base);
-gaf.Tag.DefineExternalObject2.tagName = "TagDefineExternalObject2";
-gaf.Tag.DefineExternalObject2.doParse = function (s) {
+gaf.Tag.DefineExternalObjects2 = Object.create(gaf.Tag.base);
+gaf.Tag.DefineExternalObjects2.tagName = "TagDefineExternalObjects2";
+gaf.Tag.DefineExternalObjects2.doParse = function (s) {
     var exec = s.array('Uint', s.fields(
         'objectId', 'Uint',
         'linkageName', 'String',
