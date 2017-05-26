@@ -59,6 +59,7 @@ gaf.Tag = function () {
     this["19"] = Object.create(gaf.Tag.DefineAnimationFrames3);
     this["20"] = Object.create(gaf.Tag.DefineTimeline3);
     this["21"] = Object.create(gaf.Tag.DefineExternalObjects2);
+	this["22"] = Object.create(gaf.Tag.DefineStencil);
 };
 
 gaf.Tag.base = function () {
@@ -563,6 +564,38 @@ gaf.Tag.DefineExternalObjects2.doParse = function (s) {
         'customProperties', 'JSON'
     ));
     return {'content': exec()};
+};
+
+gaf.Tag.DefineStencil = Object.create(gaf.Tag.base);
+gaf.Tag.DefineStencil.tagName = "TagDefineStencil";
+gaf.Tag.DefineStencil.doParse = function (s) {
+	var exec = gaf.Tag._readStencil(s);
+	return {'content': exec()};
+};
+
+gaf.Tag._readStencil = function(s) {
+    return function () {
+        var scale = s.Float();
+        var width = s.Uint();
+        var height = s.Uint();
+		
+        var ret = {};
+		ret['scale'] = scale;
+		ret['width'] = width;
+		ret['height'] = height;
+		
+		var bitset = [];
+		var size = Math.ceil(width * height / 8);
+        s.startNestedBuffer(size);
+        for (var i = 0; i < size; ++i) {
+            bitset.push(s.Ubyte());
+        }
+        s.endNestedBuffer();
+		
+		ret['bitset'] = bitset;
+		
+        return ret;
+    };
 };
 
 gaf.Tags = new gaf.Tag();
