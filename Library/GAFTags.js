@@ -584,14 +584,23 @@ gaf.Tag._readStencil = function(s) {
 		ret['width'] = width;
 		ret['height'] = height;
 		
-		var bitset = [];
 		var size = Math.ceil(width * height / 8);
+		var bitsetStr = "";
         s.startNestedBuffer(size);
         for (var i = 0; i < size; ++i) {
-            bitset.push(s.Ubyte());
+			var byteStr = s.Ubyte().toString(2);
+			byteStr = ('00000000' + byteStr).substring(byteStr.length);
+            bitsetStr += byteStr;
         }
         s.endNestedBuffer();
 		
+		var bitset = [];
+		for (var i = 0; i < height; ++i) {
+			var fromIdx = i * width;
+			var toIdx = fromIdx + width;
+			var rowStr = bitsetStr.substring(fromIdx, toIdx);
+			bitset.push(rowStr);
+        }
 		ret['bitset'] = bitset;
 		
         return ret;
